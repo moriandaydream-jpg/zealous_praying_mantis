@@ -380,9 +380,8 @@ textarea {
   list-style: none;
 }
 
-.prompt-list li {
-  display: grid;
-  place-items: center;
+.prompt-list button {
+  width: 100%;
   min-height: 34px;
   border: 1px solid var(--line);
   border-radius: 7px;
@@ -390,6 +389,11 @@ textarea {
   background: color-mix(in srgb, var(--blue) 10%, var(--surface));
   font-size: 12px;
   font-weight: 900;
+}
+
+.prompt-list button:hover {
+  border-color: var(--blue);
+  background: color-mix(in srgb, var(--blue) 16%, var(--surface));
 }
 
 .checklist {

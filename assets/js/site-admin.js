@@ -31,6 +31,24 @@ const prompts = {
     "악역은 왜 자신이 옳다고 믿나요?",
     "마지막 장면에서 첫 장면의 어떤 이미지가 다른 의미로 돌아오나요?"
   ],
+  plotGoal: [
+    "주인공이 지금 당장 손에 넣어야 하는 것은 무엇이고, 왜 오늘이 아니면 늦나요?",
+    "겉으로 말하는 목표와 속으로 숨기는 목표가 어떻게 다르나요?",
+    "목표를 이루기 위해 주인공이 절대 하지 않겠다고 한 일을 해야 한다면 무엇인가요?",
+    "주인공이 목표를 포기하려는 순간, 누가 다시 붙잡나요?"
+  ],
+  plotCost: [
+    "목표를 얻는 대신 잃게 되는 관계, 기억, 장소, 명예 중 가장 아픈 것은 무엇인가요?",
+    "대가를 먼저 알았다면 주인공은 그래도 같은 선택을 했을까요?",
+    "주인공 대신 다른 인물이 대가를 치르게 된다면 둘의 관계는 어떻게 바뀌나요?",
+    "승리한 뒤에도 되돌릴 수 없는 상처를 하나 남긴다면 무엇인가요?"
+  ],
+  plotTwist: [
+    "도움을 주던 인물이 사실 문제를 키우고 있었다면 이유는 무엇인가요?",
+    "금기라고 믿었던 규칙이 사실 누군가를 보호하기 위한 장치라면 누구를 지키나요?",
+    "주인공이 찾던 답이 이미 첫 장면에 있었음을 어떤 사물로 드러낼 수 있나요?",
+    "악역의 가장 잔인한 선택이 누군가에게는 유일한 자비였다면 어떤 장면이 되나요?"
+  ],
   character: [
     "이 인물은 사랑받고 싶지만, 사랑받는 순간 통제권을 잃는다고 믿습니다.",
     "이 인물은 모두를 지키려 하지만, 정작 도움을 요청하는 법을 모릅니다.",
@@ -63,7 +81,7 @@ const $$ = (selector) => Array.from(document.querySelectorAll(selector));
 
 let settings = loadJson(SITE_SETTINGS_KEY, defaultSettings);
 let workspace = loadJson(WORKSPACE_KEY, defaultWorkspace);
-let promptCursor = 0;
+const promptHistory = {};
 
 function loadJson(key, fallback) {
   try {
@@ -182,12 +200,14 @@ function bindWorkspace() {
 
 function generatePrompt(type) {
   const list = prompts[type] || prompts.idea;
-  const value = list[promptCursor % list.length];
-  promptCursor += 1;
+  const value = pickRandomPrompt(type, list);
 
   const targetMap = {
     idea: "ideaOutput",
     plot: "plotOutput",
+    plotGoal: "plotOutput",
+    plotCost: "plotOutput",
+    plotTwist: "plotOutput",
     character: "characterOutput",
     world: "worldOutput",
     scene: "dailyPrompt"
@@ -195,6 +215,18 @@ function generatePrompt(type) {
   const target = targetMap[type] || "ideaOutput";
   const output = $(`#${target}`);
   if (output) output.textContent = value;
+}
+
+function pickRandomPrompt(type, list) {
+  if (!Array.isArray(list) || list.length === 0) return "";
+  if (list.length === 1) return list[0];
+
+  let index = Math.floor(Math.random() * list.length);
+  if (promptHistory[type] === index) {
+    index = (index + 1) % list.length;
+  }
+  promptHistory[type] = index;
+  return list[index];
 }
 
 function saveWorkspace(message) {
