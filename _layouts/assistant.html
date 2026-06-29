@@ -1,0 +1,120 @@
+---
+layout: default
+---
+
+<main class="home-shell">
+  <section class="hero">
+    <div class="hero-copy">
+      <span class="eyebrow">Writing Assistant</span>
+      <h1>{{ site.title }}</h1>
+      <p>{{ site.author.bio | default: site.description }}</p>
+      <div class="hero-actions">
+        <a href="#workspace">작업 시작</a>
+        <a href="#scene-check">장면 점검</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="assistant-strip" aria-label="빠른 도구">
+    <button type="button" data-generate="idea">아이디어 씨앗</button>
+    <button type="button" data-generate="plot">플롯 질문</button>
+    <button type="button" data-generate="character">캐릭터 갈등</button>
+    <button type="button" data-generate="scene">다음 장면</button>
+  </section>
+
+  <div class="site-layout" id="workspace">
+    <section class="tool-grid" aria-label="창작 도구">
+      <article class="tool-panel wide" id="ideas">
+        <div class="panel-head">
+          <div>
+            <span class="eyebrow">Seed</span>
+            <h2>아이디어</h2>
+          </div>
+          <button type="button" data-generate="idea">새 발상</button>
+        </div>
+        <p id="ideaOutput" class="output-box">문을 열면 사라진 사람이 남긴 물건 하나가 기다리고 있다.</p>
+        <label>
+          <span>내 아이디어</span>
+          <textarea id="ideaNotes" rows="5" placeholder="떠오른 소재, 분위기, 장면을 적어두세요."></textarea>
+        </label>
+      </article>
+
+      <article class="tool-panel" id="plot">
+        <div class="panel-head">
+          <div>
+            <span class="eyebrow">Plot</span>
+            <h2>플롯</h2>
+          </div>
+          <button type="button" data-generate="plot">질문</button>
+        </div>
+        <p id="plotOutput" class="output-box">주인공이 가장 원하는 것은 무엇이고, 그것을 얻으면 무엇을 잃게 되나요?</p>
+        <ul class="prompt-list">
+          <li>목표</li>
+          <li>대가</li>
+          <li>반전</li>
+        </ul>
+      </article>
+
+      <article class="tool-panel" id="characters">
+        <div class="panel-head">
+          <div>
+            <span class="eyebrow">Character</span>
+            <h2>캐릭터</h2>
+          </div>
+          <button type="button" data-generate="character">갈등</button>
+        </div>
+        <p id="characterOutput" class="output-box">이 인물은 타인을 돕고 싶지만, 도움을 주는 순간 자신의 비밀도 드러납니다.</p>
+        <label>
+          <span>캐릭터 메모</span>
+          <textarea id="characterNotes" rows="5" placeholder="욕망, 결핍, 말투, 관계를 적어두세요."></textarea>
+        </label>
+      </article>
+
+      <article class="tool-panel" id="world">
+        <div class="panel-head">
+          <div>
+            <span class="eyebrow">World</span>
+            <h2>세계관</h2>
+          </div>
+          <button type="button" data-generate="world">규칙</button>
+        </div>
+        <p id="worldOutput" class="output-box">이 세계에서는 잊힌 약속이 장소의 형태로 남습니다.</p>
+        <label>
+          <span>세계관 메모</span>
+          <textarea id="worldNotes" rows="5" placeholder="장소, 규칙, 금기, 역사, 기술 수준을 적어두세요."></textarea>
+        </label>
+      </article>
+
+      <article class="tool-panel wide" id="scene-check">
+        <div class="panel-head">
+          <div>
+            <span class="eyebrow">Scene</span>
+            <h2>장면 점검</h2>
+          </div>
+          <button type="button" id="saveWorkspace">저장</button>
+        </div>
+        <div class="checklist">
+          <label class="check-row"><input type="checkbox" data-check="goal" /> <span>장면 목표가 분명하다</span></label>
+          <label class="check-row"><input type="checkbox" data-check="conflict" /> <span>갈등이나 압력이 있다</span></label>
+          <label class="check-row"><input type="checkbox" data-check="change" /> <span>끝에서 무언가 달라진다</span></label>
+          <label class="check-row"><input type="checkbox" data-check="hook" /> <span>다음 장면으로 넘어갈 고리가 있다</span></label>
+        </div>
+      </article>
+    </section>
+
+    <aside class="site-sidebar">
+      <section>
+        <h2>오늘의 도우미</h2>
+        <p id="dailyPrompt">지금 장면에서 인물이 절대 말하지 않으려는 한 문장을 정해보세요.</p>
+      </section>
+      <section>
+        <h2>작업 메모</h2>
+        <textarea id="quickMemo" rows="8" placeholder="오늘 쓸 것, 막힌 부분, 떠오른 문장을 적어두세요."></textarea>
+      </section>
+      <section>
+        <h2>상태</h2>
+        <p id="workspaceState">준비됨</p>
+      </section>
+    </aside>
+  </div>
+</main>

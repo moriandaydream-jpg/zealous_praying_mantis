@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="{{ site.lang | default: 'ko-KR' }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+    <meta name="description" content="{{ page.description | default: site.description }}" />
+    {% seo title=false %}
+    <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}" />
+  </head>
+  <body>
+    <div class="site" id="site">
+      <header class="site-header">
+        <a class="brand" href="{{ '/' | relative_url }}" aria-label="{{ site.title }} 홈">
+          <span class="brand-mark" aria-hidden="true">W</span>
+          <span>
+            <strong>{{ site.title }}</strong>
+            <small>{{ site.description }}</small>
+          </span>
+        </a>
+        <nav class="site-nav" aria-label="주요 메뉴">
+          <a href="{{ '/' | relative_url }}">홈</a>
+          <a href="{{ '/#ideas' | relative_url }}">아이디어</a>
+          <a href="{{ '/#plot' | relative_url }}">플롯</a>
+          <a href="{{ '/#characters' | relative_url }}">캐릭터</a>
+          <a href="{{ '/#world' | relative_url }}">세계관</a>
+          <a href="{{ '/about/' | relative_url }}">소개</a>
+        </nav>
+        <button class="admin-button" type="button" id="adminMenuToggle" aria-expanded="false">Admin</button>
+      </header>
+
+      <section class="admin-drawer" id="adminDrawer" aria-label="Admin 설정" aria-hidden="true">
+        <div class="admin-panel">
+          <div class="admin-head">
+            <div>
+              <h2>Admin</h2>
+              <span id="adminSettingsState">저장됨</span>
+            </div>
+            <button class="icon-button" type="button" id="closeAdminMenu" aria-label="닫기">x</button>
+          </div>
+          <div class="admin-body">
+            <section class="admin-section">
+              <h3>창작도우미 화면</h3>
+              <label>
+                <span>홈 화면</span>
+                <select id="adminLayoutMode">
+                  <option value="desk">작업대형</option>
+                  <option value="board">보드형</option>
+                  <option value="focus">집중형</option>
+                </select>
+              </label>
+              <label>
+                <span>본문 크기</span>
+                <select id="adminFontScale">
+                  <option value="normal">기본</option>
+                  <option value="large">크게</option>
+                </select>
+              </label>
+              <label class="check-row">
+                <input id="adminShowSidebar" type="checkbox" />
+                <span>오른쪽 메모 표시</span>
+              </label>
+            </section>
+          </div>
+          <button class="save-button" type="button" id="saveAdminSettings">설정 저장</button>
+        </div>
+      </section>
+
+      {{ content }}
+
+      <footer class="site-footer">
+        <p>&copy; {{ site.time | date: "%Y" }} {{ site.title }}. Powered by Jekyll.</p>
+      </footer>
+    </div>
+    <script src="{{ '/assets/js/site-admin.js' | relative_url }}"></script>
+  </body>
+</html>
