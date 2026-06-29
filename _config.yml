@@ -1,18 +1,14 @@
 title: 소설 창작도우미
-description: 아이디어, 플롯, 캐릭터, 세계관, 장면 점검을 돕는 Jekyll 웹도구
+description: '아이디어, 플롯, 캐릭터, 세계관, 장면 점검을 돕는 Jekyll 웹도구'
 lang: ko-KR
 timezone: Asia/Seoul
-baseurl: "/zealous_praying_mantis
-"
-url: "https://moriandaydream-jpg.github.io"
-
+baseurl: /zealous_praying_mantis
+url: 'https://moriandaydream-jpg.github.io'
 author:
   name: Odd Pennine
   bio: 이야기의 씨앗을 장면과 인물로 키우는 작업대입니다.
-
 plugins:
   - jekyll-seo-tag
-
 exclude:
   - Gemfile
   - Gemfile.lock
